@@ -1,0 +1,1 @@
+This is the Snake AI Unity 2020.1.7f1 project.
