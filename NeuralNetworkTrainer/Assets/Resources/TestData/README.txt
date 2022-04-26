@@ -1,3 +1,1 @@
-The Test Data can be found here:
-
-Used 50 of the replay files to train.
+Used 50 of the replay files when testing. Only 5 kept in project due to size of these json files.

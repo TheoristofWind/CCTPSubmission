@@ -1,3 +1,1 @@
-The Training Data can be found here:
-
-Used 1000 of the replay files to train.
+Used 1000 of the replay files to train. Only 5 kept due to size of json files (total 1000 replays were > 18GB!)
