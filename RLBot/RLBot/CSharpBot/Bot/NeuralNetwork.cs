@@ -28,6 +28,23 @@ namespace Bot
         private List<List<float>> bias;
         private List<List<List<float>>> weights;
 
+        public NeuralNetwork(string fileName, string filePath)
+        {
+            nbInputs = 41;
+            nbOutputs = 9;
+            nbHiddenLayers = 6;
+            nodesPerLayer = 30;
+            mutationRate = 0;
+
+            nodes = new List<List<float>>();
+            bias = new List<List<float>>();
+            weights = new List<List<List<float>>>();
+
+            //CreateNeuralNetwork();
+
+            SetNeuralNetworkFromFile(fileName, filePath);
+        }
+
         public NeuralNetwork(int _nbInputs, int _nbOuputs, int _nbHiddenLayers, int _nodesPerLayer, float _mutationRate)
         {
             nbInputs = _nbInputs;
@@ -40,10 +57,9 @@ namespace Bot
             bias = new List<List<float>>();
             weights = new List<List<List<float>>>();
 
-            //CreateNeuralNetwork();
+            CreateNeuralNetwork();
 
             //WriteNeuralNetworkToFile("test.txt", "./NeuralNetwork/");
-            SetNeuralNetworkFromFile("test.txt", "./NeuralNetwork/");
         }
 
         private void CreateNeuralNetwork()

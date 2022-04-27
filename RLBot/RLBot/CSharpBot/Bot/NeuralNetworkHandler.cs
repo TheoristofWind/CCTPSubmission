@@ -27,13 +27,7 @@ namespace Bot
             Shift,
         }
 
-        const int numberInputs = 9;
-        const int numberOutPuts = 9;
-        const int hiddenLayers = 1;
-        const int nodePerLayer = 9;
-        const float mutationRate = 1.0f;
-
-        NeuralNetwork neuralNet = new NeuralNetwork(numberInputs, numberOutPuts, hiddenLayers, nodePerLayer, mutationRate);
+        NeuralNetwork neuralNet = new NeuralNetwork("AI.txt", "./NeuralNetwork/"); // "./NeuralNetwork/ is located in bin/Debug/NeuralNetwork/
         InputHandler inputH = new InputHandler();
 
         public InputHandler GetInputHandler()
@@ -44,7 +38,8 @@ namespace Bot
         public Controller GetOutput(RLBotDotNet.Renderer.Renderer Renderer)
         {
             List<float> outputs = neuralNet.GetOuputFromInput(inputH.GetInputs());
-            //List<float> outputs = GetDebugOutputs();
+
+            if (outputs.Count == 0) return new Controller();
 
             for (int i = 0; i < outputs.Count; i++)
             {
@@ -60,8 +55,6 @@ namespace Bot
                 }
             }
 
-            //Renderer.DrawString2D(outputs[(int)OutputMapping.Jump].ToString() + " : " + (outputs[(int)OutputMapping.Jump] > 0.5f).ToString(), Color.SteelBlue, new Vector2(800, 410), 2, 2);
-
             return new Controller
             {
                 Throttle = outputs[(int)OutputMapping.Throttle] - outputs[(int)OutputMapping.Break],
@@ -73,23 +66,6 @@ namespace Bot
                 Yaw = outputs[(int)OutputMapping.Right] - outputs[(int)OutputMapping.Left],
                 Roll = outputs[(int)OutputMapping.Q] - outputs[(int)OutputMapping.E]
             };
-        }
-
-        List<float> GetDebugOutputs()
-        {
-            List<float> d = inputH.GetInputs();
-            //d.Add(1); //w
-            //d.Add(0); //s
-            //d.Add(1); //a
-            //d.Add(0); //d
-
-            d.Add(0); //lmb
-            d.Add(0); //rmb
-            d.Add(0); //q 
-            d.Add(0); //e
-            d.Add(0); //shift
-
-            return d;
         }
     }
 }
